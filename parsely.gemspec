@@ -10,8 +10,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Chris Pallotta", "Scott Pullen", "Tom Leonard"]
   s.email       = ["ChristopherF_Pallotta@dfci.harvard.edu", "ScottT_Pullen@dfci.harvard.edu", "Thomas_Leonard@dfci.harvard.edu"]
   s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.summary     = %q{Parses strings.}
+  s.description = %q{Parses particular kinds of strings. For now, it only handles parsing people names.}
 
   s.rubyforge_project = "parsely"
 
