@@ -1,6 +1,6 @@
 module Parsely
 
-  class Names
+  class PersonName
 
   end
 
