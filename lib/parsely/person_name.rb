@@ -1,9 +1,8 @@
+require 'parsely/person_name_constants'
+
 module Parsely
-
   class PersonName
-
-    ILLEGAL_CHARACTERS = /[^A-Za-z0-9\-\'\.&\/ \,]/
-    REPEATING_SPACES = /\s+/
+    include PersonNameConstants
 
     attr_reader :name
     attr_reader :original
@@ -32,5 +31,4 @@ module Parsely
     end
 
   end
-
 end
