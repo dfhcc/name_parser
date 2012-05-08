@@ -70,5 +70,16 @@ module Parsely
       nil
     end
 
+    def get_suffix
+      SUFFIXES.each do |suffix|
+        suffix_p = Regexp.new("(.+) (#{suffix})$", true)
+        if match = name.match(suffix_p)
+          @name = match[1].strip
+          return match[2]
+        end
+      end
+      nil
+    end
+
   end
 end
