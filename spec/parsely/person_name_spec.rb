@@ -138,6 +138,30 @@ describe Parsely::PersonName do
     end
   end
 
+  describe '#get_suffix' do
+    context 'when a suffix is found' do
+      before { set_name('Bubba Watson Jr.') }
+
+      it 'returns the suffix' do
+        ppn.get_suffix.should == 'Jr.'
+
+      end
+      it 'removes the suffix from name' do
+        ppn.get_suffix
+
+        ppn.name.should == 'Bubba Watson'
+      end
+    end
+
+    context 'when a suffix is not found' do
+       it 'returns nil' do
+         set_name('Bubba Watson')
+
+         ppn.get_suffix.should be_nil
+       end
+    end
+  end
+
   def set_name(name)
     ppn.instance_variable_set(:@name, name)
   end
