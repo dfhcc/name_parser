@@ -59,5 +59,16 @@ module Parsely
       name.gsub!(/,/, '')
     end
 
+    def get_title
+      TITLES.each do |title|
+        title_p = Regexp.new("^(#{title})(.+)", true)
+        if match = name.match(title_p)
+          @name = match[-1]
+          return match[1]
+        end
+      end
+      nil
+    end
+
   end
 end
