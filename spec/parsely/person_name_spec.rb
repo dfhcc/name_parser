@@ -115,6 +115,29 @@ describe Parsely::PersonName do
     end
   end
 
+  describe '#get_title' do
+    context 'when a title is found' do
+      before { set_name('Colonel Henry Potter') }
+
+      it 'returns the title' do
+        ppn.get_title.should == 'Colonel '
+      end
+      it 'removes the title from name' do
+        ppn.get_title
+
+        ppn.name.should == 'Henry Potter'
+      end
+    end
+
+    context 'when a title is not found' do
+      it 'returns nil' do
+        set_name('Frank Burns')
+        
+        ppn.get_title.should be_nil
+      end
+    end
+  end
+
   def set_name(name)
     ppn.instance_variable_set(:@name, name)
   end
