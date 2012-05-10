@@ -49,11 +49,11 @@ module Parsely
         def sanitize
           remove_repeating_spaces
           remove_illegal_characters
+          format_for_multiple_names if couple?
           clean_marriage_titles
           reverse_last_first_names
           remove_commas
           strip_spaces
-          format_for_multiple_names if couple?
         end
         
         def remove_illegal_characters
