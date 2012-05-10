@@ -28,8 +28,7 @@ module Parsely
       alias :to_s :name
       
       def first
-        # thinking something like:
-        # @first ||= parse_first_name
+        @first ||= parse_first
       end
       
       def middle
@@ -85,6 +84,15 @@ module Parsely
         
         def format_for_multiple_names
           sanitized.gsub!(/ +and +/i, " \& ")
+        end
+        
+        def parse_first
+        end
+        
+        def parse_middle
+        end
+        
+        def parse_last
         end
     
         def parse_title
