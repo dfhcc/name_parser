@@ -26,6 +26,10 @@ describe Parsely::Person::Name do
     it 'should clean marriage titles' do
       Parsely::Person::Name.new("Mr. & Mrs. George Washington").sanitized.should == "Mr. and Mrs. George Washington"
     end
+    
+    it 'should reverse last and first when the name format is "Last, First"' do
+      Parsely::Person::Name.new("Last, First").sanitized.should == "First Last"
+    end
   end
   
   describe '#couple?' do

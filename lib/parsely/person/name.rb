@@ -49,8 +49,9 @@ module Parsely
         def sanitize
           remove_repeating_spaces
           remove_illegal_characters
-          strip_spaces
           clean_marriage_titles
+          reverse_last_first_names
+          strip_spaces
         end
         
         def remove_illegal_characters
@@ -67,7 +68,11 @@ module Parsely
         end
         
         def clean_marriage_titles
-          sanitized.gsub!( /Mr\.? \& Mrs\.?/i, "Mr. and Mrs.")
+          sanitized.gsub!(/Mr\.? \& Mrs\.?/i, "Mr. and Mrs.")
+        end
+        
+        def reverse_last_first_names
+          sanitized.gsub!(/(.+),(.+)/, "\\2 \\1")
         end
     
     end
