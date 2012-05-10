@@ -2,17 +2,18 @@ require 'parsely/person/name_constants'
 
 module Parsely
   module Person
-    include NameConstants
-    
     class Name
+      include NameConstants
+    
       attr_reader :original
       attr_reader :sanitized
       attr_reader :couple
       alias :couple? :couple
       
       def initialize(name, opts={})
-        @original = name
-        @couple   = opts[:couple] || false
+        @original  = name
+        @sanitized = name.dup
+        @couple    = opts[:couple] || false
         sanitize
       end
       
@@ -39,8 +40,11 @@ module Parsely
       private
       
         def sanitize
-          @sanitized = @original.dup
-          #clean here
+          remove_illegal_characters
+        end
+        
+        def remove_illegal_characters
+          sanitized.gsub!(ILLEGAL_CHARACTERS, '')
         end
     
     end

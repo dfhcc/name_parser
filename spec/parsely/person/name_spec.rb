@@ -11,10 +11,15 @@ describe Parsely::Person::Name do
   end
   
   describe '#sanitized' do
-  
+    it 'should remove any illegal charaters' do
+      Parsely::Person::Name.new("aZ1/&'`!@$#%^*()_+=[]{}|\:;""").sanitized.should == "aZ1/&'"
+    end
   end
   
   context 'given a name with the format "First Last"' do
+    let!(:name)   { 'George Washington' }
+    let!(:parser) { Parsely::Person::Name.new(name) }
+  
     describe '#name' do
     end
     
