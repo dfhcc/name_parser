@@ -48,6 +48,7 @@ module Parsely
         def sanitize
           remove_repeating_spaces
           remove_illegal_characters
+          strip_spaces
         end
         
         def remove_illegal_characters
@@ -55,7 +56,12 @@ module Parsely
         end
    
         def remove_repeating_spaces
+          sanitized.gsub!(/  +/, ' ')
           sanitized.gsub!(REPEATING_SPACES, ' ')
+        end
+        
+        def strip_spaces
+          sanitized.strip!
         end
     
     end

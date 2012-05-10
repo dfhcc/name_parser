@@ -16,7 +16,11 @@ describe Parsely::Person::Name do
     end
     
     it 'should remove any extra spaces' do
-      Parsely::Person::Name.new("a  b   c\td\n").sanitized.should == "a b c d "
+      Parsely::Person::Name.new("a  b   c\td\n").sanitized.should == "a b c d"
+    end
+    
+    it 'should remove any leading or trailing whitespaces' do
+      Parsely::Person::Name.new(" A. NAME ").sanitized.should == "A. NAME"
     end
   end
   
