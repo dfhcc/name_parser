@@ -22,6 +22,10 @@ describe Parsely::Person::Name do
     it 'should remove any leading or trailing whitespaces' do
       Parsely::Person::Name.new(" A. NAME ").sanitized.should == "A. NAME"
     end
+    
+    it 'should clean marriage titles' do
+      Parsely::Person::Name.new("Mr. & Mrs. George Washington").sanitized.should == "Mr. and Mrs. George Washington"
+    end
   end
   
   describe '#couple?' do

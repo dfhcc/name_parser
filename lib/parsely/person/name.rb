@@ -50,6 +50,7 @@ module Parsely
           remove_repeating_spaces
           remove_illegal_characters
           strip_spaces
+          clean_marriage_titles
         end
         
         def remove_illegal_characters
@@ -63,6 +64,10 @@ module Parsely
         
         def strip_spaces
           sanitized.strip!
+        end
+        
+        def clean_marriage_titles
+          sanitized.gsub!( /Mr\.? \& Mrs\.?/i, "Mr. and Mrs.")
         end
     
     end
