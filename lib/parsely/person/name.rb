@@ -8,13 +8,19 @@ module Parsely
       attr_reader :original
       attr_reader :sanitized
       attr_reader :couple
+      attr_reader :proper
+      
       alias :couple? :couple
+      alias :proper? :proper
       
       def initialize(name, opts={})
         @original  = name
-        @sanitized = name.dup
         @couple    = opts[:couple] || false
-        sanitize
+        @proper    = opts[:proper] || true
+      end
+      
+      def sanitized
+        @sanitized ||= sanitize
       end
       
       def name
@@ -40,11 +46,14 @@ module Parsely
       private
       
         def sanitize
-          remove_illegal_characters
+          name = @original.dup
+          remove_illegal_characters(name)
+          
+          name
         end
         
-        def remove_illegal_characters
-          sanitized.gsub!(ILLEGAL_CHARACTERS, '')
+        def remove_illegal_characters(name)
+          name.gsub!(ILLEGAL_CHARACTERS, '')
         end
     
     end
