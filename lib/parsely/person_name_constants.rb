@@ -116,5 +116,8 @@ module Parsely
       'Ald(\.|erman)? '
     ]
 
+    NAME_PATTERN = "([\\w\\-\\']+)[\.{1,}\\s|\\s]+"
+
+    LAST_NAME_PATTERN = "\;?([\\w\\-\\']+|(Mc|Mac|Des|Dell[ae]|Del|De La|De Los|Da|Di|Du|La|Le|Lo|St\\.|Den|Von|Van|Von Der|Van De[nr])?\\s+([\\w]+))"
   end
 end

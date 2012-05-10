@@ -81,5 +81,25 @@ module Parsely
       nil
     end
 
+    def parse_name
+      first_last_pattern               = Regexp.new('^%s%s$' % [ NAME_PATTERN, LAST_NAME_PATTERN ], true)
+      first_middle_last_pattern        = Regexp.new('^%s%s%s$' % [ NAME_PATTERN, NAME_PATTERN, LAST_NAME_PATTERN ], true)
+      first_middle_middle_last_pattern = Regexp.new('^%s%s%s%s$' % [ NAME_PATTERN, NAME_PATTERN, NAME_PATTERN, LAST_NAME_PATTERN ], true)
+
+      case
+        when match = name.match(first_last_pattern)
+          first, last = match.captures
+        when match = name.match(first_middle_middle_last_pattern)
+          first, *middle, last = match.captures[0..3]
+          middle = middle.join(' ')
+        when match = name.match(first_middle_last_pattern)
+          first, middle, last = match.captures
+      end
+
+      return nil unless match
+      # TODO: assign values to attributes rather than returning multiple values
+      return first, middle, last
+    end
+
   end
 end
