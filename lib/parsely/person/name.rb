@@ -42,7 +42,8 @@ module Parsely
         @title ||= parse_title
       end
       
-      def suffixes
+      def suffix
+        @suffix ||= parse_suffix
       end
       
       private
@@ -92,6 +93,18 @@ module Parsely
             
             if title_match = sanitized.match(title_regexp)
               return title_match[1].strip
+            end
+          end
+          
+          return ''
+        end
+        
+        def parse_suffix
+          SUFFIXES.each do |suffix_regexp|
+            suffix_regexp = Regexp.new("(.+) (#{suffix_regexp})$", true)
+            
+            if suffix_match = sanitized.match(suffix_regexp)
+              return suffix_match[2].strip
             end
           end
           

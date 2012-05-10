@@ -70,19 +70,34 @@ describe Parsely::Person::Name do
     end
   end
   
-  describe '#titles' do
-    context 'without a title given' do
-      it 'should return a blank string' do
+  describe '#title' do
+    context 'given a name wihtout a title' do
+      it 'returns a blank string' do
         Parsely::Person::Name.new("Ringo Starr").title.should == ''
       end
     end
     
-    context 'given a title' do
+    context 'given a name with a title' do
       it 'should return the title' do
         Parsely::Person::Name.new("Dr. Winston O'Boogie").title.should == 'Dr.'
         Parsely::Person::Name.new("Sir Paul McCartney").title.should == 'Sir'
         Parsely::Person::Name.new('Mr. George Harrison').title.should == 'Mr.'
         Parsely::Person::Name.new("Mr. and Mrs. John Lennon").title.should == "Mr. and Mrs."
+      end
+    end
+  end
+  
+  describe '#suffix' do
+    context 'given a name without a suffix' do
+      it 'returns a blank string' do
+        Parsely::Person::Name.new("John Adams").suffix.should == ''
+      end
+    end
+    
+    context 'given a name with a suffix' do
+      it 'returns string of the suffix' do
+        Parsely::Person::Name.new("John Adams Jr.").suffix.should == "Jr."
+        Parsely::Person::Name.new("Gregory House M.D.").suffix.should == "M.D."
       end
     end
   end
