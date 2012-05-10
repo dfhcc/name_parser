@@ -28,11 +28,17 @@ describe Parsely::Person::Name do
     end
     
     it 'should reverse last and first when the name format is "Last, First"' do
-      Parsely::Person::Name.new("Last, First").sanitized.should == "First Last"
+      Parsely::Person::Name.new("Last, First").sanitized.should == "First ;Last"
     end
     
     it 'should remove any unnecessary commas' do
       Parsely::Person::Name.new("George Washington,").sanitized.should == "George Washington"
+    end
+    
+    context 'the couple option is set to true' do
+      it 'replaces "and" with "&" when two names are specified' do
+        Parsely::Person::Name.new("George Washington and John Adams", :couple => true).sanitized.should == "George Washington & John Adams"
+      end
     end
   end
   

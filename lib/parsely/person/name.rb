@@ -53,6 +53,7 @@ module Parsely
           reverse_last_first_names
           remove_commas
           strip_spaces
+          format_for_multiple_names if couple?
         end
         
         def remove_illegal_characters
@@ -73,11 +74,15 @@ module Parsely
         end
         
         def reverse_last_first_names
-          sanitized.gsub!(/(.+),(.+)/, "\\2 \\1")
+          sanitized.gsub!(/(.+),(.+)/, "\\2 ;\\1")
         end
         
         def remove_commas
           sanitized.gsub!(/,/, '')
+        end
+        
+        def format_for_multiple_names
+          sanitized.gsub!(/ +and +/i, " \& ")
         end
     
     end
