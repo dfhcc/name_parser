@@ -25,6 +25,7 @@ module Parsely
       
       def name
       end
+      alias :to_s :name
       
       def first
         # thinking something like:
