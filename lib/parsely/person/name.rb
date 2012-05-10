@@ -5,7 +5,7 @@ module Parsely
     class Name
       include NameConstants
     
-      attr_reader :name
+      attr_reader :sanitized
       attr_reader :original
       attr_reader :couple
       attr_reader :proper
@@ -15,14 +15,12 @@ module Parsely
       
       def initialize(name, opts={})
         @original  = name
-        @name      = name.dup
+        @sanitized = name.dup
         
         @couple    = opts[:couple].nil? ? false : opts[:couple]
         @proper    = opts[:proper].nil? ? true  : opts[:proper]
-      end
-      
-      def sanitized
-        @sanitized ||= sanitize
+        
+        sanitize
       end
       
       def full_name
@@ -49,12 +47,10 @@ module Parsely
       
         def sanitize
           remove_illegal_characters
-          
-          name
         end
         
         def remove_illegal_characters
-          name.gsub!(ILLEGAL_CHARACTERS, '')
+          sanitized.gsub!(ILLEGAL_CHARACTERS, '')
         end
     
     end
