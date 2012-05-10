@@ -14,6 +14,11 @@ describe Parsely::Person::Name do
     it 'should remove any illegal charaters' do
       Parsely::Person::Name.new("aZ1/&'`!@$#%^*()_+=[]{}|\:;""").sanitized.should == "aZ1/&'"
     end
+    
+    it 'should remove any extra spaces' do
+      name = "a  b   c\td\n"
+      Parsely::Person::Name.new(name).sanitized.should == "a b c d "
+    end
   end
   
   describe '#couple?' do

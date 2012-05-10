@@ -23,7 +23,7 @@ module Parsely
         sanitize
       end
       
-      def full_name
+      def name
       end
       
       def first
@@ -46,11 +46,16 @@ module Parsely
       private
       
         def sanitize
+          remove_repeating_spaces
           remove_illegal_characters
         end
         
         def remove_illegal_characters
           sanitized.gsub!(ILLEGAL_CHARACTERS, '')
+        end
+   
+        def remove_repeating_spaces
+          sanitized.gsub!(REPEATING_SPACES, ' ')
         end
     
     end
