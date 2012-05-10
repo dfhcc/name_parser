@@ -38,7 +38,8 @@ module Parsely
       def last
       end
       
-      def titles
+      def title
+        @title ||= parse_title
       end
       
       def suffixes
@@ -51,7 +52,7 @@ module Parsely
           remove_illegal_characters
           format_for_multiple_names if couple?
           clean_marriage_titles
-          reverse_last_first_names
+          format_first_last_name
           remove_commas
           strip_spaces
         end
@@ -73,7 +74,7 @@ module Parsely
           sanitized.gsub!(/Mr\.? \& Mrs\.?/i, 'Mr. and Mrs.')
         end
         
-        def reverse_last_first_names
+        def format_first_last_name
           sanitized.gsub!(/(.+),(.+)/, "\\2 ;\\1")
         end
         
@@ -85,6 +86,17 @@ module Parsely
           sanitized.gsub!(/ +and +/i, " \& ")
         end
     
+        def parse_title
+          TITLES.each do |title_regexp|
+            title_regexp = Regexp.new("^(#{title_regexp})(.+)", true)
+            
+            if title_match = sanitized.match(title_regexp)
+              return title_match[1].strip
+            end
+          end
+          
+          return ''
+        end
     end
   end
 end

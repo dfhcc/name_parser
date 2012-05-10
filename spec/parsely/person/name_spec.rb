@@ -70,26 +70,20 @@ describe Parsely::Person::Name do
     end
   end
   
-  context 'given a name with the format "First Last"' do
-    let!(:name)   { 'George Washington' }
-    let!(:parser) { Parsely::Person::Name.new(name) }
-  
-    describe '#name' do
+  describe '#titles' do
+    context 'without a title given' do
+      it 'should return a blank string' do
+        Parsely::Person::Name.new("Ringo Starr").title.should == ''
+      end
     end
     
-    describe '#first' do
-    end
-    
-    describe '#middle' do
-    end
-    
-    describe '#last' do
-    end
-    
-    describe '#titles' do
-    end
-    
-    describe '#suffixes' do
+    context 'given a title' do
+      it 'should return the title' do
+        Parsely::Person::Name.new("Dr. Winston O'Boogie").title.should == 'Dr.'
+        Parsely::Person::Name.new("Sir Paul McCartney").title.should == 'Sir'
+        Parsely::Person::Name.new('Mr. George Harrison').title.should == 'Mr.'
+        Parsely::Person::Name.new("Mr. and Mrs. John Lennon").title.should == "Mr. and Mrs."
+      end
     end
   end
 end
