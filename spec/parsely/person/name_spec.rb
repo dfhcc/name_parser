@@ -30,6 +30,10 @@ describe Parsely::Person::Name do
     it 'should reverse last and first when the name format is "Last, First"' do
       Parsely::Person::Name.new("Last, First").sanitized.should == "First Last"
     end
+    
+    it 'should remove any unnecessary commas' do
+      Parsely::Person::Name.new("George Washington,").sanitized.should == "George Washington"
+    end
   end
   
   describe '#couple?' do
