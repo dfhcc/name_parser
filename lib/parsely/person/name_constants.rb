@@ -3,7 +3,7 @@ module Parsely
     module NameConstants
       NAME_PATTERN           = "A-Za-z0-9\\-\\'"
       LAST_NAME_PATTERN      = "((;.+)|(((Mc|Mac|Des|Dell[ae]|Del|De La|De Los|Da|Di|Du|La|Le|Lo|St\.|Den|Von|Van|Von Der|Van De[nr]) )?([#{NAME_PATTERN}]+)))"
-      MULT_LAST_NAME_PATTERN = "((;.+)|(((Mc|Mac|Des|Dell[ae]|Del|De La|De Los|Da|Di|Du|La|Le|Lo|St\.|Den|Von|Van|Von Der|Van De[nr]) )?([#{NAME_PATTERN} ]+)))"
+      MULTI_LAST_NAME_PATTERN = "((;.+)|(((Mc|Mac|Des|Dell[ae]|Del|De La|De Los|Da|Di|Du|La|Le|Lo|St\.|Den|Von|Van|Von Der|Van De[nr]) )?([#{NAME_PATTERN} ]+)))"
       
       ILLEGAL_CHARACTERS     = /[^A-Za-z0-9\-\'\.&\/ \,]/
       REPEATING_SPACES       = /\s+/
@@ -19,7 +19,7 @@ module Parsely
         "^([#{NAME_PATTERN}]+) ([A-Za-z]\.[A-Za-z]\.) (#{LAST_NAME_PATTERN})$",       # FIRST_NAME A. B. LAST_NAME
         "^([#{NAME_PATTERN}]+) (#{LAST_NAME_PATTERN})$",                              # FIRST_NAME LAST_NAME
         "^([#{NAME_PATTERN}]+) ([#{NAME_PATTERN}]+) (#{LAST_NAME_PATTERN})$",         # FIRST_NAME MIDDLE_NAME LAST_NAME
-        "^([#{NAME_PATTERN}]+) ([A-Za-z])\.? (#{MULT_LAST_NAME_PATTERN})$"            # FIRST_NAME M. LAST_NAME1 LAST_NAME2
+        "^([#{NAME_PATTERN}]+) ([A-Za-z])\.? (#{MULTI_LAST_NAME_PATTERN})$"           # FIRST_NAME M. LAST_NAME1 LAST_NAME2
       ]
       
       TITLES = [

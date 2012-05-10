@@ -70,6 +70,18 @@ describe Parsely::Person::Name do
     end
   end
   
+  describe '#first' do
+    
+  end
+  
+  describe '#middle' do
+  
+  end
+  
+  describe '#last' do
+  
+  end
+
   describe '#title' do
     context 'given a name wihtout a title' do
       it 'returns a blank string' do
