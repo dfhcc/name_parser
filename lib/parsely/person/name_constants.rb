@@ -1,8 +1,12 @@
 module Parsely
   module Person
     module NameConstants
-      ILLEGAL_CHARACTERS = /[^A-Za-z0-9\-\'\.&\/ \,]/
-      REPEATING_SPACES = /\s+/
+      NAME_PATTERN           = "A-Za-z0-9\\-\\'"
+      LAST_NAME_PATTERN      = "((;.+)|(((Mc|Mac|Des|Dell[ae]|Del|De La|De Los|Da|Di|Du|La|Le|Lo|St\.|Den|Von|Van|Von Der|Van De[nr]) )?([#{NAME_PATTERN}]+)))"
+      MULT_LAST_NAME_PATTERN = "((;.+)|(((Mc|Mac|Des|Dell[ae]|Del|De La|De Los|Da|Di|Du|La|Le|Lo|St\.|Den|Von|Van|Von Der|Van De[nr]) )?([#{NAME_PATTERN} ]+)))"
+      ILLEGAL_CHARACTERS     = /[^A-Za-z0-9\-\'\.&\/ \,]/
+      REPEATING_SPACES       = /\s+/
+      
       TITLES = [
         'Mr\.? and Mrs\.? ',
         'Mrs\.? ',
