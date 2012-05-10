@@ -12,7 +12,7 @@ describe Parsely::Person::Name do
   
   describe '#sanitized' do
     it 'should remove any illegal charaters' do
-      Parsely::Person::Name.new("aZ1/&'`!@$#%^*()_+=[]{}|\:;""").sanitized.should == "aZ1/&'"
+      Parsely::Person::Name.new("aZ1/&-'`!@$#%^*()_+=[]{}|\:;""").sanitized.should == "aZ1/&-'"
     end
     
     it 'should remove any extra spaces' do
