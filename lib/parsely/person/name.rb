@@ -16,8 +16,9 @@ module Parsely
       def initialize(name, opts={})
         @original  = name
         @name      = name.dup
-        @couple    = opts[:couple] || false
-        @proper    = opts[:proper] || true
+        
+        @couple    = opts[:couple].nil? ? false : opts[:couple]
+        @proper    = opts[:proper].nil? ? true  : opts[:proper]
       end
       
       def sanitized
@@ -49,7 +50,7 @@ module Parsely
         def sanitize
           remove_illegal_characters
           
-          @name
+          name
         end
         
         def remove_illegal_characters

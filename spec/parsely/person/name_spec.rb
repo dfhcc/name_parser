@@ -16,6 +16,34 @@ describe Parsely::Person::Name do
     end
   end
   
+  describe '#couple?' do
+    it 'should be false when the option is not specified' do
+      Parsely::Person::Name.new("Some Name").should_not be_couple
+    end
+    
+    it 'should be true when the option is set to true' do
+      Parsely::Person::Name.new("Some Name", :couple => true).should be_couple
+    end
+    
+    it 'should be false when the option is set to false' do
+      Parsely::Person::Name.new("Some Name", :couple => false).should_not be_couple
+    end
+  end
+  
+  describe '#proper?' do
+    it 'should be true when the option is not specified' do
+      Parsely::Person::Name.new("Some Name").should be_proper
+    end
+    
+    it 'should be true when the option is set to true' do
+      Parsely::Person::Name.new("Some Name", :proper => true).should be_proper
+    end
+    
+    it 'should be false when the option is set to false' do
+      Parsely::Person::Name.new("Some Name", :proper => false).should_not be_proper
+    end
+  end
+  
   context 'given a name with the format "First Last"' do
     let!(:name)   { 'George Washington' }
     let!(:parser) { Parsely::Person::Name.new(name) }
