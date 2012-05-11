@@ -1,5 +1,8 @@
 require 'spec_helper'
 require 'parsely/person/name'
+require 'parsely/person/name_constants'
+
+include Parsely::Person::NameConstants
 
 describe Parsely::Person::Name do
 
@@ -28,7 +31,7 @@ describe Parsely::Person::Name do
     end
     
     it 'should reverse last and first when the name format is "Last, First"' do
-      Parsely::Person::Name.new("Last, First").sanitized.should == "First ;Last"
+      Parsely::Person::Name.new("Last, First").sanitized.should == "First Last"
     end
     
     it 'should remove any unnecessary commas' do
@@ -69,18 +72,6 @@ describe Parsely::Person::Name do
       Parsely::Person::Name.new("Some Name", :proper => false).should_not be_proper
     end
   end
-  
-  describe '#first' do
-    
-  end
-  
-  describe '#middle' do
-  
-  end
-  
-  describe '#last' do
-  
-  end
 
   describe '#title' do
     context 'given a name wihtout a title' do
@@ -111,6 +102,41 @@ describe Parsely::Person::Name do
         Parsely::Person::Name.new("John Adams Jr.").suffix.should == "Jr."
         Parsely::Person::Name.new("Gregory House M.D.").suffix.should == "M.D."
       end
+    end
+  end
+  
+  describe '#parse_name' do
+    it 'should return the name without title or suffix' do
+      Parsely::Person::Name.new("Mr. John Smith Jr.").parse_name.should == "John Smith"
+      Parsely::Person::Name.new("John Smith").parse_name.should == "John Smith"
+      Parsely::Person::Name.new("John Edward Smith").parse_name.should == "John Edward Smith"
+    end
+  end
+  
+  describe '#first' do
+    it 'returns the first name' do
+      Parsely::Person::Name.new("First1 Last").first.should == "First1"
+      Parsely::Person::Name.new("First2 Middle Last").first.should == "First2"
+      Parsely::Person::Name.new("First3 M M Last").first.should == "First3"
+      Parsely::Person::Name.new("Last, First4").first.should == "First4"
+    end
+  end
+  
+  describe '#last' do
+    it 'returns the last name' do
+      Parsely::Person::Name.new("First Last1").last.should == "Last1"
+      Parsely::Person::Name.new("First Middle Last2").last.should == "Last2"
+      Parsely::Person::Name.new("First M M Last3").last.should == "Last3"
+      Parsely::Person::Name.new("Last4, First").last.should == "Last4"
+    end
+  end
+  
+  describe '#middle' do
+    it 'returns the middle name' do
+      Parsely::Person::Name.new("First Last1").middle.should == ""
+      Parsely::Person::Name.new("First Middle Last2").middle.should == "Middle"
+      Parsely::Person::Name.new("First M M Last3").middle.should == "M M"
+      Parsely::Person::Name.new("Last4, First").middle.should == ""
     end
   end
 end

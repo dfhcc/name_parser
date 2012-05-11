@@ -5,10 +5,13 @@ module Parsely
     class Name
       include NameConstants
     
-      attr_reader :sanitized
       attr_reader :original
       attr_reader :couple
       attr_reader :proper
+      
+      attr_reader :sanitized
+      attr_reader :parse_name
+      attr_reader :parse_type
       
       alias :couple? :couple
       alias :proper? :proper
@@ -32,9 +35,11 @@ module Parsely
       end
       
       def middle
+        @middle ||= parse_middle
       end
       
       def last
+        @last ||= parse_last
       end
       
       def title
@@ -43,6 +48,10 @@ module Parsely
       
       def suffix
         @suffix ||= parse_suffix
+      end
+      
+      def parse_name
+        @parse_name ||= sanitized.gsub(title, '').gsub(suffix, '').strip
       end
       
       private
@@ -75,7 +84,7 @@ module Parsely
         end
         
         def format_first_last_name
-          sanitized.gsub!(/(.+),(.+)/, "\\2 ;\\1")
+          sanitized.gsub!(/(.+),(.+)/, "\\2 \\1")
         end
         
         def remove_commas
@@ -87,12 +96,30 @@ module Parsely
         end
         
         def parse_first
+          f = ''
+          first_name_pattern = Regexp.new("^([#{NAME_PATTERN}]+)", true)
+          if match = parse_name.match(first_name_pattern)
+            f = match[1].strip
+          end
+          f
         end
         
         def parse_middle
+          m = ''
+          middle_name_pattern = Regexp.new("#{first}(.*?)#{last}")
+          if match = parse_name.match(middle_name_pattern)
+            m = match[1].strip
+          end
+          m
         end
         
         def parse_last
+          l = ''
+          name_split = parse_name.split # grr couldn't get the regexp version to work
+          if name_split.any?
+            l = name_split[name_split.length - 1].strip
+          end
+          l
         end
     
         def parse_title
