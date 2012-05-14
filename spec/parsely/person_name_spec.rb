@@ -5,18 +5,21 @@ describe Parsely::PersonName do
   let(:name) { 'Horatio Xavier Hornblower' }
   let(:ppn) { Parsely::PersonName.new(name) }
 
-  describe 'name attribute' do 
-    it 'is read only' do
-      ppn.methods.should_not include(:name=) 
+  [:original, :name, :first, :middle, :last, :title, :suffix ].each do |attr|
+    describe "#{attr} attribute" do 
+      it 'is read only' do
+        ppn.methods.should_not include(":#{attr}=") 
+      end
     end
+  end
 
+  describe 'name attribute' do
     it 'is set on initialize' do
       ppn.name.should == name 
     end
 
     it 'is shallow copy of original attr' do
       ppn.name.should == ppn.original
-
       set_name('changed')
 
       ppn.name.should_not == ppn.original
@@ -24,11 +27,7 @@ describe Parsely::PersonName do
 
   end
 
-  describe 'original attribute' do
-    it 'is read only' do
-      ppn.methods.should_not include(:original=)
-    end
-
+   describe 'original attribute' do
     it 'is set on initialize' do
       ppn.original.should == name
     end
