@@ -44,8 +44,7 @@ module Parsely
 
     def clean_trailing_suffixes
       SUFFIXES.each do |suffix|
-        suffix_p = Regexp.new( "(.+), (#{suffix})$", true )
-        @name.gsub!( suffix_p, "\\1 \\2" )
+        @name.gsub!( Regexp.new("(.+), (#{suffix})$", true ), "\\1 \\2" )
       end
     end
 
