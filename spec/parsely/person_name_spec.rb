@@ -141,76 +141,76 @@ describe Parsely::PersonName do
     context 'when first initial and last name' do
       before do 
         set_name('J Tolkien')
-        @parts = ppn.parse_name
+        ppn.parse_name
       end
 
       it 'returns first initial' do
-        @parts[0].should == 'J' 
+        ppn.first.should == 'J' 
       end
 
       it 'returns nil middle name' do
-        @parts[1].should be_nil
+        ppn.middle.should be_nil
       end
 
       it 'returns last name' do
-        @parts[2].should == 'Tolkien'
+        ppn.last.should == 'Tolkien'
       end
     end
 
     context 'when first initial, middle initial and last name' do
       before do
         set_name('J R Tolkien')
-        @parts = ppn.parse_name
+        ppn.parse_name
       end
 
       it 'returns first initial' do
-        @parts[0].should == 'J' 
+        ppn.first.should == 'J' 
       end
 
       it 'returns middle initial' do
-        @parts[1].should == 'R'
+        ppn.middle.should == 'R'
       end
 
       it 'returns last name' do
-        @parts[2].should == 'Tolkien'
+        ppn.last.should == 'Tolkien'
       end
     end
 
     context 'when first initial dot middle initial dot last name' do
       before do
         set_name('J. R. Tolkien')
-        @parts = ppn.parse_name
+        ppn.parse_name
       end
 
       it 'returns first initial' do
-        @parts[0].should == 'J' 
+        ppn.first.should == 'J' 
       end
 
       it 'returns middle initial' do
-        @parts[1].should == 'R'
+        ppn.middle.should == 'R'
       end
 
       it 'returns last name' do
-        @parts[2].should == 'Tolkien'
+        ppn.last.should == 'Tolkien'
       end
     end
 
     context 'when first initial, two middle initials and last name' do
       before do
         set_name('J R R Tolkien')
-        @parts = ppn.parse_name
+         ppn.parse_name
       end
 
       it 'returns first initial' do
-        @parts[0].should == 'J' 
+        ppn.first.should == 'J' 
       end
 
       it 'returns both middle initials' do
-        @parts[1].should == 'R R'
+        ppn.middle.should == 'R R'
       end
 
       it 'returns last name' do
-        @parts[2].should == 'Tolkien'
+        ppn.last.should == 'Tolkien'
       end
 
     end
@@ -218,121 +218,122 @@ describe Parsely::PersonName do
     context 'when first initial, middle name and last name' do
       before do
         set_name('J Ronald Tolkien')
-        @parts = ppn.parse_name
+        ppn.parse_name
       end
 
       it 'returns first initial' do
-        @parts[0].should == 'J' 
+        ppn.first.should == 'J' 
       end
 
       it 'returns middle name' do
-        @parts[1].should == 'Ronald'
+        ppn.middle.should == 'Ronald'
       end
 
       it 'returns last name' do
-        @parts[2].should == 'Tolkien'
+        ppn.last.should == 'Tolkien'
       end
     end
 
     context 'when first name, middle initial and last name' do
       before do
         set_name('John R Tolkien')
-        @parts = ppn.parse_name
+         ppn.parse_name
       end
 
       it 'returns first name' do
-        @parts[0].should == 'John' 
+        ppn.first.should == 'John' 
       end
 
       it 'returns middle initial' do
-        @parts[1].should == 'R'
+        ppn.middle.should == 'R'
       end
 
       it 'returns last name' do
-        @parts[2].should == 'Tolkien'
+        ppn.last.should == 'Tolkien'
       end
     end
 
     context 'when first name, two middle initials and last name' do
       before do
         set_name('John R R Tolkien')
-        @parts = ppn.parse_name
+        ppn.parse_name
       end
 
       it 'returns first name' do
-        @parts[0].should == 'John' 
+        ppn.first.should == 'John' 
       end
 
       it 'returns middle name' do
-        @parts[1].should == 'R R'
+        ppn.middle.should == 'R R'
       end
 
       it 'returns last name' do
-        @parts[2].should == 'Tolkien'
+        ppn.last.should == 'Tolkien'
       end
     end
 
     context 'when first name, two middle initials with dots and last name' do
       before do
         set_name('John R. R. Tolkien')
-        @parts = ppn.parse_name
+         ppn.parse_name
       end
 
       it 'returns first name' do
-        @parts[0].should == 'John' 
+        ppn.first.should == 'John' 
       end
 
       it 'returns middle name' do
-        @parts[1].should == 'R R'
+        ppn.middle.should == 'R R'
       end
 
       it 'returns last name' do
-        @parts[2].should == 'Tolkien'
+        ppn.last.should == 'Tolkien'
       end
     end
 
     context 'when first name and last name' do
       before do 
         set_name('John Tolkien')
-        @parts = ppn.parse_name
+        ppn.parse_name
       end
 
       it 'returns first name' do
-        @parts[0].should == 'John' 
+        ppn.first.should == 'John' 
       end
 
       it 'returns nil middle name' do
-        @parts[1].should be_nil
+        ppn.middle.should be_nil
       end
 
       it 'returns last name' do
-        @parts[2].should == 'Tolkien'
+        ppn.last.should == 'Tolkien'
       end
     end
 
     context 'when first name, middle name and last name' do
       before do 
         set_name('John Ronald Tolkien')
-        @parts = ppn.parse_name
+        ppn.parse_name
       end
 
       it 'returns first name' do
-        @parts[0].should == 'John' 
+        ppn.first.should == 'John' 
       end
 
       it 'returns  middle name' do
-        @parts[1].should == 'Ronald'
+        ppn.middle.should == 'Ronald'
       end
 
       it 'returns last name' do
-        @parts[2].should == 'Tolkien'
+        ppn.last.should == 'Tolkien'
       end
     end
 
     context 'when last name is hyphenated' do
       it 'returns last name' do
         set_name('John R. Tolkien-Smith')
-        ppn.parse_name[2].should == 'Tolkien-Smith'
+        ppn.parse_name
+        ppn.last.should == 'Tolkien-Smith'
       end
 
     end
@@ -340,7 +341,8 @@ describe Parsely::PersonName do
     context 'when last name is preceded by a semicolon' do
       it 'returns last name' do 
         set_name('J R R ;Tolkien')
-        ppn.parse_name[2].should == 'Tolkien'
+        ppn.parse_name
+        ppn.last.should == 'Tolkien'
       end
     end
 

@@ -80,17 +80,13 @@ module Parsely
 
       case
         when match = name.match(first_last_pattern)
-          first, last = match.captures
+          @first, @last = match.captures
         when match = name.match(first_middle_middle_last_pattern)
-          first, *middle, last = match.captures[0..3]
-          middle = middle.join(' ')
+          @first, *middles, @last = match.captures[0..3]
+          @middle = middles.join(' ')
         when match = name.match(first_middle_last_pattern)
-          first, middle, last = match.captures
+          @first, @middle, @last = match.captures
       end
-
-      return nil unless match
-      # TODO: assign values to attributes rather than returning multiple values
-      return first, middle, last
     end
 
   end
