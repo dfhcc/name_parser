@@ -1,11 +1,13 @@
 require 'parsely'
 require 'ruby-debug'
 
+Parsely::PersonName.send(:public, *Parsely::PersonName.protected_instance_methods)
+
 describe Parsely::PersonName do
   let(:name) { 'Horatio Xavier Hornblower' }
   let(:ppn) { Parsely::PersonName.new(name) }
 
-  [:original, :name, :first, :middle, :last, :title, :suffix ].each do |attr|
+  [:name, :first, :middle, :last, :title, :suffix ].each do |attr|
     describe "#{attr} attribute" do 
       it 'is read only' do
         ppn.methods.should_not include(":#{attr}=") 
@@ -15,25 +17,11 @@ describe Parsely::PersonName do
 
   describe 'name attribute' do
     it 'is set on initialize' do
-      ppn.name.should == name 
-    end
-
-    it 'is shallow copy of original attr' do
-      ppn.name.should == ppn.original
-      set_name('changed')
-
-      ppn.name.should_not == ppn.original
-    end
-
-  end
-
-  describe 'original attribute' do
-    it 'is set on initialize' do
-      ppn.original.should == name
+      get_name.should == name 
     end
   end
 
-  describe '#to_hash' do
+   describe '#to_hash' do
    it 'returns title, first, middle, last and suffix attributes as hash' do
      set_name('Major Peter X. Q Mac Donovan, Jr.')
      expected = { :title => 'Major', :first => 'Peter', :middle => 'X Q', :last => 'Mac Donovan', :suffix => 'Jr.' }
@@ -47,7 +35,7 @@ describe Parsely::PersonName do
       set_name("aZ1/&'`!@$#%^*()_+=[]{}|\:;""")
       ppn.remove_illegal_characters
 
-      ppn.name.should == "aZ1/&'"
+      get_name.should == "aZ1/&'"
     end
   end
 
@@ -64,7 +52,7 @@ describe Parsely::PersonName do
       set_name(' a ')
       ppn.strip_spaces
 
-      ppn.name.should == 'a'
+      get_name.should == 'a'
     end
   end
 
@@ -73,7 +61,7 @@ describe Parsely::PersonName do
       set_name('Biggie Smalls, Junior, Esquire, Phd., VII')
       ppn.clean_trailing_suffixes
 
-      ppn.name.should == 'Biggie Smalls, Junior, Esquire, Phd. VII'
+      get_name.should == 'Biggie Smalls, Junior, Esquire, Phd. VII'
     end
   end
 
@@ -82,7 +70,7 @@ describe Parsely::PersonName do
       set_name('Smith, Johnny')
       ppn.reverse_last_and_first_names
 
-      ppn.name.should == ' Johnny ;Smith'
+      get_name.should == ' Johnny ;Smith'
     end
   end
 
@@ -91,7 +79,7 @@ describe Parsely::PersonName do
       set_name('Hounddog ;Taylor,')
       ppn.remove_commas
 
-      ppn.name.should == 'Hounddog ;Taylor'
+      get_name.should == 'Hounddog ;Taylor'
     end
   end
 
@@ -106,7 +94,7 @@ describe Parsely::PersonName do
       it 'removes the title from name' do
         ppn.parse_title
 
-        ppn.name.should == 'Henry Potter'
+        get_name.should == 'Henry Potter'
       end
     end
 
@@ -132,7 +120,7 @@ describe Parsely::PersonName do
       it 'removes the suffix from name' do
         ppn.parse_suffix
 
-        ppn.name.should == 'Bubba Watson'
+        get_name.should == 'Bubba Watson'
       end
     end
 
@@ -361,4 +349,7 @@ describe Parsely::PersonName do
     ppn.instance_variable_set(:@name, name)
   end
 
+  def get_name
+    ppn.instance_variable_get(:@name)
+  end
 end
