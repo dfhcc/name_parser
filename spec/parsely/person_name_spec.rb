@@ -117,7 +117,8 @@ describe Parsely::PersonName do
       before { set_name('Bubba Watson Jr.') }
 
       it 'returns the suffix' do
-        ppn.get_suffix.should == 'Jr.'
+        ppn.get_suffix
+        ppn.suffix.should == 'Jr.'
 
       end
       it 'removes the suffix from name' do
@@ -131,7 +132,8 @@ describe Parsely::PersonName do
        it 'returns nil' do
          set_name('Bubba Watson')
 
-         ppn.get_suffix.should be_nil
+         ppn.get_suffix
+         ppn.suffix.should be_nil
        end
     end
   end

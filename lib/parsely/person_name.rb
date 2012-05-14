@@ -66,10 +66,9 @@ module Parsely
         suffix_p = Regexp.new("(.+) (#{suffix})$", true)
         if match = name.match(suffix_p)
           @name = match[1].strip
-          return match[2]
+          @suffix = match[2]
         end
       end
-      nil
     end
 
     def parse_name
