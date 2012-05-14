@@ -55,8 +55,7 @@ module Parsely
 
     def parse_title
       TITLES.each do |title|
-        title_p = Regexp.new("^(#{title})(.+)", true)
-        if match = name.match(title_p)
+        if match = name.match(Regexp.new("^(#{title})(.+)", true))
           @name = match[-1]
           @title = match[1].strip
         end
@@ -65,8 +64,7 @@ module Parsely
 
     def parse_suffix
       SUFFIXES.each do |suffix|
-        suffix_p = Regexp.new("(.+) (#{suffix})$", true)
-        if match = name.match(suffix_p)
+        if match = name.match(Regexp.new("(.+) (#{suffix})$", true))
           @name = match[1].strip
           @suffix = match[2]
         end
@@ -74,17 +72,13 @@ module Parsely
     end
 
     def parse_name
-      first_last_pattern               = Regexp.new('^%s%s$' % [ NAME_PATTERN, LAST_NAME_PATTERN ], true)
-      first_middle_last_pattern        = Regexp.new('^%s%s%s$' % [ NAME_PATTERN, NAME_PATTERN, LAST_NAME_PATTERN ], true)
-      first_middle_middle_last_pattern = Regexp.new('^%s%s%s%s$' % [ NAME_PATTERN, NAME_PATTERN, NAME_PATTERN, LAST_NAME_PATTERN ], true)
-
       case
-        when match = name.match(first_last_pattern)
+        when match = name.match(Regexp.new('^%s%s$' % [ NAME_PATTERN, LAST_NAME_PATTERN ], true))
           @first, @last = match.captures
-        when match = name.match(first_middle_middle_last_pattern)
+        when match = name.match(Regexp.new('^%s%s%s%s$' % [ NAME_PATTERN, NAME_PATTERN, NAME_PATTERN, LAST_NAME_PATTERN ], true))
           @first, *middles, @last = match.captures[0..3]
           @middle = middles.join(' ')
-        when match = name.match(first_middle_last_pattern)
+        when match = name.match(Regexp.new('^%s%s%s$' % [ NAME_PATTERN, NAME_PATTERN, LAST_NAME_PATTERN ], true))
           @first, @middle, @last = match.captures
       end
     end
