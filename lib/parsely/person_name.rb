@@ -12,6 +12,11 @@ module Parsely
       @original = name
     end
 
+    def to_hash
+      run
+      [ :title, :first, :middle, :last, :suffix ].inject(Hash.new) { |h, attr| h.merge!(attr => send(attr)) }
+    end
+
     def run
       remove_illegal_characters
       remove_repeating_spaces

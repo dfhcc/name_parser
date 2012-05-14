@@ -27,10 +27,19 @@ describe Parsely::PersonName do
 
   end
 
-   describe 'original attribute' do
+  describe 'original attribute' do
     it 'is set on initialize' do
       ppn.original.should == name
     end
+  end
+
+  describe '#to_hash' do
+   it 'returns title, first, middle, last and suffix attributes as hash' do
+     set_name('Major Peter X. Q Mac Donovan, Jr.')
+     expected = { :title => 'Major', :first => 'Peter', :middle => 'X Q', :last => 'Mac Donovan', :suffix => 'Jr.' }
+
+     ppn.to_hash.should == expected
+   end
   end
 
   describe '#remove_illegal_characters' do
