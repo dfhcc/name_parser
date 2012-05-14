@@ -4,8 +4,8 @@ module Parsely
   class PersonName
     include PersonNameConstants
 
-    attr_reader :name
-    attr_reader :original
+    attr_reader :original, :name
+    attr_reader :first, :middle, :last, :title, :suffix
 
     def initialize(name)
       @name = name.dup
@@ -56,10 +56,9 @@ module Parsely
         title_p = Regexp.new("^(#{title})(.+)", true)
         if match = name.match(title_p)
           @name = match[-1]
-          return match[1]
+          @title = match[1].strip
         end
       end
-      nil
     end
 
     def get_suffix

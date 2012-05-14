@@ -91,8 +91,9 @@ describe Parsely::PersonName do
     context 'when a title is found' do
       before { set_name('Colonel Henry Potter') }
 
-      it 'returns the title' do
-        ppn.get_title.should == 'Colonel '
+      it 'sets title attribute' do
+        ppn.get_title
+        ppn.title.should == 'Colonel'
       end
       it 'removes the title from name' do
         ppn.get_title
@@ -105,7 +106,8 @@ describe Parsely::PersonName do
       it 'returns nil' do
         set_name('Frank Burns')
         
-        ppn.get_title.should be_nil
+        ppn.get_title
+        ppn.title.should be_nil
       end
     end
   end
