@@ -6,13 +6,10 @@ module Parsely
 
     attr_reader :name
     attr_reader :original
-    attr_reader :couple
-    alias :couple? :couple
 
-    def initialize(name, opts={})
+    def initialize(name)
       @name = name.dup
       @original = name
-      @couple = opts[:couple] || false
     end
 
     def run
@@ -20,11 +17,10 @@ module Parsely
       remove_repeating_spaces
       strip_spaces
       clean_trailing_suffixes
-      clean_marriage_titles
       reverse_last_and_first_names
       remove_commas
       strip_spaces
-      couple? ? parse_couple : parse_individual
+      parse_name
     end
 
     def remove_illegal_characters
@@ -44,10 +40,6 @@ module Parsely
         suffix_p = Regexp.new( "(.+), (#{suffix})$", true )
         name.gsub!( suffix_p, "\\1 \\2" )
       end
-    end
-
-    def clean_marriage_titles
-      name.gsub!( /Mr\.? \& Mrs\.?/i, "Mr. and Mrs." )
     end
 
     def reverse_last_and_first_names

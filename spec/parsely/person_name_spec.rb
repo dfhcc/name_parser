@@ -34,26 +34,6 @@ describe Parsely::PersonName do
     end
   end
 
-  describe 'couple attribute' do
-    it 'is read only' do
-      ppn.methods.should_not include(:couple=)
-    end
-
-    it 'defaults to false' do
-      ppn.couple.should be_false
-    end
-
-    it 'is set through options argument' do
-      ppn = Parsely::PersonName.new(name, { :couple => true })
-
-      ppn.couple.should be_true
-    end
-
-    it 'has an alias #couple?' do
-      ppn.couple.should == ppn.couple?
-    end
-  end
-
   describe '#remove_illegal_characters' do
     it 'only allows alpha-numerics, dashes, backslashes, apostrophes and ampersands' do
       set_name("aZ1/&'`!@$#%^*()_+=[]{}|\:;""")
@@ -89,15 +69,6 @@ describe Parsely::PersonName do
     end
   end
 
-  describe '#clean_marriage_titles' do
-    it 'replaces ampersand in married couple titles' do 
-      set_name('Mr. & Mrs. Harvey Birdman')
-      ppn.clean_marriage_titles
-
-      ppn.name.should == 'Mr. and Mrs. Harvey Birdman'
-    end
-  end
- 
   describe '#reverse_last_and_first_names' do
     it 'reorders last and first names if comma is present' do
       set_name('Smith, Johnny')
