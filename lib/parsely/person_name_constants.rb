@@ -1,8 +1,6 @@
 module Parsely
   module PersonNameConstants
 
-    ILLEGAL_CHARACTERS = /[^A-Za-z0-9\-\'\.&\/ \,]/
-    REPEATING_SPACES = /\s+/
     SUFFIXES = [
       'Jn?r\.?,? Esq\.?',
       'Sn?r\.?,? Esq\.?',
@@ -33,6 +31,7 @@ module Parsely
       'M\.?D\.?',           # M.D.
       'D.?M\.?D\.?'         # M.D.
     ]
+
     TITLES = [ 'Mr\.? and Mrs\.? ',
       'Mrs\.? ',
       'M/s\.? ',

@@ -31,11 +31,11 @@ module Parsely
     protected
 
     def remove_illegal_characters
-      @name.gsub!(ILLEGAL_CHARACTERS, '')
+      @name.gsub!(/[^A-Za-z0-9\-\'\.&\/ \,]/, '')
     end
 
     def remove_repeating_spaces
-      @name.gsub!(REPEATING_SPACES, ' ')
+      @name.gsub!(/\s+/, ' ')
     end
 
     def strip_spaces 
