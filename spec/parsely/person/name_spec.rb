@@ -100,7 +100,7 @@ describe Parsely::Person::Name do
     context 'given a name with a suffix' do
       it 'returns string of the suffix' do
         Parsely::Person::Name.new("John Adams Jr.").suffix.should == "Jr."
-        Parsely::Person::Name.new("Gregory House M.D.").suffix.should == "M.D."
+        Parsely::Person::Name.new("Gregory House M.D.").suffix.should == "M.d."
       end
     end
   end
@@ -137,6 +137,26 @@ describe Parsely::Person::Name do
       Parsely::Person::Name.new("First Middle Last2").middle.should == "Middle"
       Parsely::Person::Name.new("First M M Last3").middle.should == "M M"
       Parsely::Person::Name.new("Last4, First").middle.should == ""
+    end
+  end
+  
+  describe '#name' do
+    it 'returns the full name properly formatted' do
+      Parsely::Person::Name.new("First Last").name.should == "First Last"
+      Parsely::Person::Name.new("first last").name.should == "First Last"
+      Parsely::Person::Name.new("Mr. First Last").name.should == "Mr. First Last"
+      Parsely::Person::Name.new("First Last Jr.").name.should == "First Last Jr."
+      Parsely::Person::Name.new("Last, First").name.should == "First Last"
+    end
+  
+    context 'when proper is not specified' do
+      it 'returns the name' do
+        Parsely::Person::Name.new("First Last", :proper => false).name.should == "First Last"
+        Parsely::Person::Name.new("first last", :proper => false).name.should == "first last"
+        Parsely::Person::Name.new("Mr. First Last", :proper => false).name.should == "Mr. First Last"
+        Parsely::Person::Name.new("First Last jr.", :proper => false).name.should == "First Last jr."
+        Parsely::Person::Name.new("Last, First", :proper => false).name.should == "First Last"
+      end
     end
   end
 end

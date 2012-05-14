@@ -1,3 +1,4 @@
+require 'titleize'
 require 'parsely/person/name_constants'
 
 module Parsely
@@ -27,6 +28,7 @@ module Parsely
       end
       
       def name
+        @name ||= build_name
       end
       alias :to_s :name
       
@@ -96,30 +98,33 @@ module Parsely
         end
         
         def parse_first
-          f = ''
+          first_name = ''
           first_name_pattern = Regexp.new("^([#{NAME_PATTERN}]+)", true)
           if match = parse_name.match(first_name_pattern)
-            f = match[1].strip
+            first_name = match[1].strip
+            first_name = first_name.titleize if proper?
           end
-          f
+          first_name
         end
         
         def parse_middle
-          m = ''
+          middle_name = ''
           middle_name_pattern = Regexp.new("#{first}(.*?)#{last}")
           if match = parse_name.match(middle_name_pattern)
-            m = match[1].strip
+            middle_name = match[1].strip
+            middle_name = middle_name.titleize if proper?
           end
-          m
+          middle_name
         end
         
         def parse_last
-          l = ''
+          last_name = ''
           name_split = parse_name.split # grr couldn't get the regexp version to work
           if name_split.any?
-            l = name_split[name_split.length - 1].strip
+            last_name = name_split[name_split.length - 1].strip
+            last_name = last_name.titleize if proper?
           end
-          l
+          last_name
         end
     
         def parse_title
@@ -139,11 +144,23 @@ module Parsely
             suffix_regexp = Regexp.new("(.+) (#{suffix_regexp})$", true)
             
             if suffix_match = sanitized.match(suffix_regexp)
-              return suffix_match[2].strip
+              suffix_str = suffix_match[2].strip
+              suffix_str.capitalize! if proper?
+              return suffix_str
             end
           end
           
           return ''
+        end
+        
+        def build_name
+          name_parts = []
+          name_parts << title unless title.nil? || title == ''
+          name_parts << first unless first.nil? || first == ''
+          name_parts << middle unless middle.nil? || middle == ''
+          name_parts << last unless last.nil? || last == ''
+          name_parts << suffix unless suffix.nil? || suffix == ''
+          name_parts.join(' ')
         end
     end
   end
