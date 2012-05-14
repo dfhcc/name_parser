@@ -86,16 +86,16 @@ describe Parsely::PersonName do
     end
   end
 
-  describe '#get_title' do
+  describe '#parse_title' do
     context 'when a title is found' do
       before { set_name('Colonel Henry Potter') }
 
       it 'sets title attribute' do
-        ppn.get_title
+        ppn.parse_title
         ppn.title.should == 'Colonel'
       end
       it 'removes the title from name' do
-        ppn.get_title
+        ppn.parse_title
 
         ppn.name.should == 'Henry Potter'
       end
@@ -105,23 +105,23 @@ describe Parsely::PersonName do
       it 'returns nil' do
         set_name('Frank Burns')
         
-        ppn.get_title
+        ppn.parse_title
         ppn.title.should be_nil
       end
     end
   end
 
-  describe '#get_suffix' do
+  describe '#parse_suffix' do
     context 'when a suffix is found' do
       before { set_name('Bubba Watson Jr.') }
 
       it 'returns the suffix' do
-        ppn.get_suffix
+        ppn.parse_suffix
         ppn.suffix.should == 'Jr.'
 
       end
       it 'removes the suffix from name' do
-        ppn.get_suffix
+        ppn.parse_suffix
 
         ppn.name.should == 'Bubba Watson'
       end
@@ -131,7 +131,7 @@ describe Parsely::PersonName do
        it 'returns nil' do
          set_name('Bubba Watson')
 
-         ppn.get_suffix
+         ppn.parse_suffix
          ppn.suffix.should be_nil
        end
     end

@@ -20,6 +20,8 @@ module Parsely
       reverse_last_and_first_names
       remove_commas
       strip_spaces
+      parse_title
+      parse_suffix
       parse_name
     end
 
@@ -51,7 +53,7 @@ module Parsely
       name.gsub!(/,/, '')
     end
 
-    def get_title
+    def parse_title
       TITLES.each do |title|
         title_p = Regexp.new("^(#{title})(.+)", true)
         if match = name.match(title_p)
@@ -61,7 +63,7 @@ module Parsely
       end
     end
 
-    def get_suffix
+    def parse_suffix
       SUFFIXES.each do |suffix|
         suffix_p = Regexp.new("(.+) (#{suffix})$", true)
         if match = name.match(suffix_p)
