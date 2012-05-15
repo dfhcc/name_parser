@@ -65,11 +65,9 @@ module Parsely
     end
 
     def parse_suffix
-      SUFFIXES.each do |suffix|
-        if match = @name.match(Regexp.new("(.+) (#{suffix})$", true))
-          @name = match[1].strip
-          @suffix = match[2]
-        end
+      if match = @name.match(Regexp.new("(.+) (%s)$" % SUFFIX_PATTERN, true))
+        @name = match[1].strip
+        @suffix = match[2]
       end
     end
 
