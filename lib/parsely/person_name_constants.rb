@@ -1,6 +1,7 @@
 module Parsely
   module PersonNameConstants
 
+ 
     SUFFIXES = [
       'Jn?r\.?,? Esq\.?',
       'Sn?r\.?,? Esq\.?',
@@ -114,6 +115,9 @@ module Parsely
       'Prof(\.|essor)? ',
       'Ald(\.|erman)? '
     ]
+
+    SUFFIX_PATTERN = 'Jn?r\.?,? Esq\.?|Sn?r\.?,? Esq\.?|I{1,3},? Esq\.?|Jn?r\.?,? M\.?D\.?|Sn?r\.?,? M\.?D\.?|I{1,3},? M\.?D\.?|Sn?r\.?|Jn?r\.?|Esq(\.|uire)?|Esquire.|Attorney at Law.|Attorney-at-Law.|Ph\.?d\.?|C\.?P\.?A\.?|XI{1,3}|X|IV|VI{1,3}|V|IX|I{1,3}\.?|M\.?D\.?|D.?M\.?D\.?'
+  
 
     NAME_PATTERN = "([\\w\\-\\']+)[\.{1,}\\s|\\s]+"
 

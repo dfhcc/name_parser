@@ -43,9 +43,7 @@ module Parsely
     end
 
     def clean_trailing_suffixes
-      SUFFIXES.each do |suffix|
-        @name.gsub!( Regexp.new("(.+), (#{suffix})$", true ), "\\1 \\2" )
-      end
+      @name.gsub!(Regexp.new("(.+), (%s)$" % SUFFIX_PATTERN, true), "\\1 \\2")
     end
 
     def reverse_last_and_first_names
