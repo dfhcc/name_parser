@@ -32,6 +32,10 @@ module Parsely
       end
       alias :to_s :name
       
+      def to_hash
+        @hash ||= {:title => title, :first => first, :middle => middle, :last => last, :suffix => suffix}
+      end
+      
       def first
         @first ||= parse_first
       end

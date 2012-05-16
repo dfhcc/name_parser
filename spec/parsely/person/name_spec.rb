@@ -159,4 +159,14 @@ describe Parsely::Person::Name do
       end
     end
   end
+  
+  describe '#to_hash' do
+    it 'returns a hash of the name parts' do
+      Parsely::Person::Name.new("First Last").to_hash.should == {:title => "", :first => "First", :middle => "", :last => "Last", :suffix => ""}
+      Parsely::Person::Name.new("Mr. First Last").to_hash.should == {:title => "Mr.", :first => "First", :middle => "", :last => "Last", :suffix => ""}
+      Parsely::Person::Name.new("First Last Jr.").to_hash.should == {:title => "", :first => "First", :middle => "", :last => "Last", :suffix => "Jr."}
+      Parsely::Person::Name.new("Last, First").to_hash.should == {:title => "", :first => "First", :middle => "", :last => "Last", :suffix => ""}
+      Parsely::Person::Name.new("Mr. First Middle Last Jr.").to_hash.should == {:title => "Mr.", :first => "First", :middle => "Middle", :last => "Last", :suffix => "Jr."}
+    end
+  end
 end
