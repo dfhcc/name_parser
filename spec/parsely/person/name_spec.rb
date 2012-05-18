@@ -169,4 +169,16 @@ describe Parsely::Person::Name do
       Parsely::Person::Name.new("Mr. First Middle Last Jr.").to_hash.should == {:title => "Mr.", :first => "First", :middle => "Middle", :last => "Last", :suffix => "Jr."}
     end
   end
+  
+  describe '#[]' do
+    let!(:parser) { Parsely::Person::Name.new("Mr. First Middle Last Jr.") }
+    
+    it 'returns the correct value' do
+      parser[:title].should == 'Mr.'
+      parser[:first].should == 'First'
+      parser[:middle].should == 'Middle'
+      parser[:last].should == 'Last'
+      parser[:suffix].should == 'Jr.'
+    end
+  end
 end

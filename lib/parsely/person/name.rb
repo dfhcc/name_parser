@@ -60,6 +60,10 @@ module Parsely
         @parse_name ||= sanitized.gsub(title, '').gsub(suffix, '').strip
       end
       
+      def [](attr)
+        self.send attr.to_sym
+      end
+      
       private
       
         def sanitize
