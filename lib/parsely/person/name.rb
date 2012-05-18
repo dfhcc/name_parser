@@ -127,7 +127,7 @@ module Parsely
         
         def parse_last
           last_name = ''
-          last_name_pattern = Regexp.new(" #{LAST_NAME_PATTERN}$", true)
+          last_name_pattern = Regexp.new("#{LAST_NAME_PATTERN}$", true)
           if match = parse_name.match(last_name_pattern)
             last_name = match[1].strip
             last_name = last_name.titleize if proper?

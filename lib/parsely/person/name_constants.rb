@@ -2,7 +2,7 @@ module Parsely
   module Person
     module NameConstants
       NAME_PATTERN           = "A-Za-z0-9\\-\\'"
-      LAST_NAME_PATTERN      = "\;?([\\w\\-\\']+|(Mc|Mac|Des|Dell[ae]|Del|De La|De Los|Da|Di|Du|La|Le|Lo|St\\.|Den|Von|Van|Von Der|Van De[nr])?\\s+([\\w]+))"
+      LAST_NAME_PATTERN      = "\\s+?([\\w\\-\\']+|(Mc|Mac|Des|Dell[ae]|Del|De La|De Los|Da|Di|Du|La|Le|Lo|St\\.|Den|Von|Van|Von Der|Van De[nr])?\\s+([\\w]+))"
       
       ILLEGAL_CHARACTERS     = /[^A-Za-z0-9\-\'\.&\/ \,]/
       REPEATING_SPACES       = /\s+/
