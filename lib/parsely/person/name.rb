@@ -127,9 +127,9 @@ module Parsely
         
         def parse_last
           last_name = ''
-          name_split = parse_name.split # grr couldn't get the regexp version to work
-          if name_split.any?
-            last_name = name_split[name_split.length - 1].strip
+          last_name_pattern = Regexp.new(" #{LAST_NAME_PATTERN}$", true)
+          if match = parse_name.match(last_name_pattern)
+            last_name = match[1].strip
             last_name = last_name.titleize if proper?
           end
           last_name
