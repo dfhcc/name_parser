@@ -2,94 +2,15 @@ module Parsely
   module Person
     module NameConstants
       NAME_PATTERN           = "A-Za-z0-9\\-\\'"
-      LAST_NAME_PATTERN      = "\\s+?([\\w\\-\\']+|(Mc|Mac|Des|Dell[ae]|Del|De La|De Los|Da|Di|Du|La|Le|Lo|St\\.|Den|Von|Van|Von Der|Van De[nr])?\\s+([\\w]+))"
+      LAST_NAME_PATTERN      = "\\s+?([\\w\\-\\']+|(Mc|Mac|Des|Dell[ae]|Del|De La|De Los|Da|Di|Du|La|Le|Lo|St\\.|Den|Von|Van|Von Der|Van De[nr])?\\s+([\\w]+))$"
       
       ILLEGAL_CHARACTERS     = /[^A-Za-z0-9\-\'\.&\/ \,]/
       REPEATING_SPACES       = /\s+/
       
-      TITLES = [
-        'Mr\.? and Mrs\.? ',
-        'Mrs\.? ',
-        'M/s\.? ',
-        'Ms\.? ',
-        'Miss\.? ',
-        'Mme\.? ',
-        'Mr\.? ',
-        'Messrs ',
-        'Mister ',
-        'Mast(\.|er)? ',
-        'Ms?gr\.? ',
-        'Sir ',
-        'Lord ',
-        'Lady ',
-        'Madam(e)? ',
-        'Dame ',
-  
-        # Medical
-        'Dr\.? ',
-        'Doctor ',
-        'Sister ',
-        'Matron ',
-  
-        # Legal
-        'Judge ',
-        'Justice ',
-  
-        # Police
-        'Det\.? ',
-        'Insp\.? ',
-  
-        # Military
-        'Brig(adier)? ',
-        'Capt(\.|ain)? ',
-        'Commander ',
-        'Commodore ',
-        'Cdr\.? ',
-        'Colonel ',
-        'Gen(\.|eral)? ',
-        'Field Marshall ',
-        'Fl\.? Off\.? ',
-        'Flight Officer ',
-        'Flt Lt ',
-        'Flight Lieutenant ',
-        'Pte\. ',
-        'Private ',
-        'Sgt\.? ',
-        'Sargent ',
-        'Air Commander ',
-        'Air Commodore ',
-        'Air Marshall ',
-        'Lieutenant Colonel ',
-        'Lt\.? Col\.? ',
-        'Lt\.? Gen\.? ',
-        'Lt\.? Cdr\.? ',
-        'Lieutenant ',
-        '(Lt|Leut|Lieut)\.? ',
-        'Major General ',
-        'Maj\.? Gen\.?',
-        'Major ',
-        'Maj\.? ',
-  
-        # Religious
-        'Rabbi ',
-        'Brother ',
-        'Father ',
-        'Chaplain ',
-        'Pastor ',
-        'Bishop ',
-        'Mother Superior ',
-        'Mother ',
-        'Most Rever[e|a]nd ',
-        'Very Rever[e|a]nd ',
-        'Mt\.? Revd\.? ',
-        'V\.? Revd?\.? ',
-        'Rever[e|a]nd ',
-        'Revd?\.? ',
-  
-        # Other
-        'Prof(\.|essor)? ',
-        'Ald(\.|erman)? '
-      ]
+      TITLES_PATTERN         = "^(Mr\.? and Mrs\.? |Mrs\.? |M/s\.? |Ms\.? |Miss\.? |Mme\.? |Mr\.? |Messrs |Mister |Mast(\.|er)? |Ms?gr\.? |Sir |Lord |Lady |Madam(e)? |Dame |Dr\.? |Doctor |Sister |Matron |Judge |Justice |Det\.? |Insp\.? |Brig(adier)? |Capt(\.|ain)? |Commander |Commodore |Cdr\.? |Colonel |Gen(\.|eral)? |Field Marshall |Fl\.? O
+ff\.? |Flight Officer |Flt Lt |Flight Lieutenant |Pte\. |Private |Sgt\.? |Sargent |Air Commander |Air Commodore |Air Marshall |Lieutenant Colonel |Lt\.? Col\.? |Lt\.? Gen\.? |Lt\.? Cdr\.? |Lieutenant |(Lt|Leut|Lieut)\.? |Major General |Maj\.? Gen\.?|Major |Maj\.? |Rabbi |Brother |Father |Chaplain |Pastor |Bi
+shop |Mother Superior |Mother |Most Rever[e|a]nd |Very Rever[e|a]nd |Mt\.? Revd\.? |V\.? Revd?\.? |Rever[e|a]nd |Revd?\.? |Prof(\.|essor)? |Ald(\.|erman)?)(.+)"
+      
       SUFFIXES = [
         'Jn?r\.?,? Esq\.?',
         'Sn?r\.?,? Esq\.?',

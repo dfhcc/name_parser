@@ -123,7 +123,7 @@ module Parsely
         
         def parse_last
           last_name = ''
-          last_name_pattern = Regexp.new("#{LAST_NAME_PATTERN}$", true)
+          last_name_pattern = Regexp.new("#{LAST_NAME_PATTERN}", true)
           if match = parse_name.match(last_name_pattern)
             last_name = match[1].strip
             last_name = last_name.titleize if proper?
@@ -132,15 +132,11 @@ module Parsely
         end
     
         def parse_title
-          TITLES.each do |title_regexp|
-            title_regexp = Regexp.new("^(#{title_regexp})(.+)", true)
-            
-            if title_match = sanitized.match(title_regexp)
-              return title_match[1].strip
-            end
-          end
-          
-          return ''
+          title = ''
+          if title_match = sanitized.match(Regexp.new(TITLES_PATTERN, true))
+            title = title_match[1].strip
+          end      
+          return title
         end
         
         def parse_suffix
