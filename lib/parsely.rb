@@ -1,6 +1,10 @@
-require "parsely/version"
-require 'parsely/person/name'
+require 'titleize'
 
 module Parsely
-  # Your code goes here...
+  autoload :Version,        'parsely/version'
+  
+  module Person
+    autoload :Name,           'parsely/person/name'
+    autoload :NameConstants,  'parsely/person/name_constants'
+  end
 end

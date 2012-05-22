@@ -1,3 +1,5 @@
 require 'rubygems'
 require 'rspec'
-require 'parsely'
+
+res = require File.expand_path('../../lib/parsely', __FILE__)
+puts res.to_s

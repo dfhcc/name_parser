@@ -1,6 +1,3 @@
-require 'titleize'
-require File.expand_path('../name_constants', __FILE__)
-
 module Parsely
   module Person
     class Name

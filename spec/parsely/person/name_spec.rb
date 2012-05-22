@@ -1,6 +1,4 @@
 require 'spec_helper'
-require 'parsely/person/name'
-require 'parsely/person/name_constants'
 
 include Parsely::Person::NameConstants
 
