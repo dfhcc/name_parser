@@ -9,7 +9,6 @@ module Parsely
       
       attr_reader :sanitized
       attr_reader :parse_name
-      attr_reader :parse_type
       
       alias :couple? :couple
       alias :proper? :proper
