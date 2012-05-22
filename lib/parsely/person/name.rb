@@ -136,21 +136,15 @@ module Parsely
           if title_match = sanitized.match(Regexp.new(TITLES_PATTERN, true))
             title = title_match[1].strip
           end      
-          return title
+          title
         end
         
         def parse_suffix
-          SUFFIXES.each do |suffix_regexp|
-            suffix_regexp = Regexp.new("(.+) (#{suffix_regexp})$", true)
-            
-            if suffix_match = sanitized.match(suffix_regexp)
-              suffix_str = suffix_match[2].strip
-              suffix_str.capitalize! if proper?
-              return suffix_str
-            end
-          end
-          
-          return ''
+          suffix = ''
+          if suffix_match = sanitized.match(Regexp.new(SUFFIXES_PATTERN, true))
+            suffix = suffix_match[2].strip
+          end       
+          suffix
         end
         
         def build_name

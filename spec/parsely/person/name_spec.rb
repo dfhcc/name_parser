@@ -98,7 +98,7 @@ describe Parsely::Person::Name do
     context 'given a name with a suffix' do
       it 'returns string of the suffix' do
         Parsely::Person::Name.new("John Adams Jr.").suffix.should == "Jr."
-        Parsely::Person::Name.new("Gregory House M.D.").suffix.should == "M.d."
+        Parsely::Person::Name.new("Gregory House M.D.").suffix.should == "M.D."
       end
     end
   end
