@@ -1,4 +1,4 @@
-require 'parsely'
+require 'spec_helper'
 require 'ruby-debug'
 
 Parsely::PersonName.send(:public, *Parsely::PersonName.protected_instance_methods)

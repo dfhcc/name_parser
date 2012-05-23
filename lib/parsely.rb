@@ -1,6 +1,5 @@
-require "parsely/version"
-require 'parsely/person_name'
-
 module Parsely
-  # Your code goes here...
+  autoload :Version,                'parsely/version'
+  autoload :PersonNameConstants,    'parsely/person_name_constants'
+  autoload :PersonName,             'parsely/person_name'
 end

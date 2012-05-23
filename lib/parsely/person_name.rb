@@ -1,5 +1,3 @@
-require 'parsely/person_name_constants'
-
 module Parsely
   class PersonName
     include PersonNameConstants

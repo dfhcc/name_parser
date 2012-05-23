@@ -1,3 +1,4 @@
 require 'rubygems'
 require 'rspec'
-require 'parsely'
+
+require File.expand_path('../../lib/parsely', __FILE__)
