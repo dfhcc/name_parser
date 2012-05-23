@@ -56,11 +56,9 @@ module Parsely
     end
 
     def parse_title
-      TITLES.each do |title|
-        if match = @name.match(Regexp.new("^(#{title})(.+)", true))
-          @name = match[-1]
-          @title = match[1].strip
-        end
+      if match = @name.match(Regexp.new("^(%s) (.+)" % TITLE_PATTERN, true))
+        @name = match[-1]
+        @title = match[1].strip
       end
     end
 
