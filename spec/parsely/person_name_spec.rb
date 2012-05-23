@@ -30,29 +30,30 @@ describe Parsely::PersonName do
    end
   end
 
-  describe '#remove_illegal_characters' do
+  describe '#remove_non_name_characters' do
     it 'only allows alpha-numerics, dashes, backslashes, apostrophes and ampersands' do
       set_name("aZ1/&'`!@$#%^*()_+=[]{}|\:;""")
-      ppn.remove_illegal_characters
+      ppn.remove_non_name_characters
 
       get_name.should == "aZ1/&'"
     end
   end
 
-  describe '#remove_repeating_spaces' do
-    it 'replaces all repeating spaces, tabs and line breaks with a single space' do
-      set_name("a  b   c\td\n")
+  describe '#remove_extra_spaces' do
+    it 'removes leading spaces, tabs and line breaks' do
+      set_name(" \t\nFoo")
 
-      ppn.remove_repeating_spaces.should == 'a b c d '
+      ppn.remove_extra_spaces.should == 'Foo'
     end
-  end
+    it 'removes trailing spaces, tabs and line breaks' do
+      set_name("Foo \t\n")
 
-  describe '#strip_spaces' do
-    it 'removes leading and trailing spaces' do
-      set_name(' a ')
-      ppn.strip_spaces
+      ppn.remove_extra_spaces.should == 'Foo'
+    end
+    it 'replaces repeating spaces, tabs and line breaks with a single space' do
+      set_name("  Foo  \t\nBar  ")
 
-      get_name.should == 'a'
+      ppn.remove_extra_spaces.should == 'Foo Bar'
     end
   end
 

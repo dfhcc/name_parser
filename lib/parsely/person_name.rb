@@ -16,13 +16,11 @@ module Parsely
     end
 
     def run
-      remove_illegal_characters
-      remove_repeating_spaces
-      strip_spaces
+      remove_non_name_characters
+      remove_extra_spaces
       clean_trailing_suffixes
       reverse_last_and_first_names
       remove_commas
-      strip_spaces
       parse_title
       parse_suffix
       parse_name
@@ -30,16 +28,12 @@ module Parsely
 
     protected
 
-    def remove_illegal_characters
+    def remove_non_name_characters
       @name.gsub!(/[^A-Za-z0-9\-\'\.&\/ \,]/, '')
     end
 
-    def remove_repeating_spaces
-      @name.gsub!(/\s+/, ' ')
-    end
-
-    def strip_spaces 
-      @name.strip!
+    def remove_extra_spaces
+      @name.gsub(/\s+/, ' ').strip!
     end
 
     def clean_trailing_suffixes
