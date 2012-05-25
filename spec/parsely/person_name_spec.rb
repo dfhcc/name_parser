@@ -21,12 +21,17 @@ describe Parsely::PersonName do
     end
   end
 
-   describe '#to_hash' do
+ describe '#to_hash' do
    it 'returns title, first, middle, last and suffix attributes as hash' do
      set_name('Major Peter X. Q Mac Donovan, Jr.')
      expected = { :title => 'Major', :first => 'Peter', :middle => 'X Q', :last => 'Mac Donovan', :suffix => 'Jr.' }
 
      ppn.to_hash.should == expected
+   end
+   
+   it 'calls run only once' do
+    ppn.should_receive(:run).once
+    2.times { ppn.to_hash }
    end
   end
 

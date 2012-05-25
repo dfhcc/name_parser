@@ -9,8 +9,9 @@ module Parsely
     end
 
     def to_hash
+      return @name_hash if defined?(@name_hash)
       run
-      [ :title, :first, :middle, :last, :suffix ].inject(Hash.new) { |h, attr| h.merge!(attr => send(attr)) }
+      @name_hash = [ :title, :first, :middle, :last, :suffix ].inject(Hash.new) { |h, attr| h.merge!(attr => send(attr)) }
     end
 
     def run
