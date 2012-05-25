@@ -86,6 +86,12 @@ describe Parsely::Person::Name do
         Parsely::Person::Name.new("Mr. and Mrs. John Lennon").title.should == "Mr. and Mrs."
       end
     end
+    
+    it 'calls parse_title once' do
+      parser = Parsely::Person::Name.new("Sir Paul McCartney")
+      parser.should_receive(:parse_title).once
+      2.times { parser.title }
+    end
   end
   
   describe '#suffix' do
@@ -100,6 +106,12 @@ describe Parsely::Person::Name do
         Parsely::Person::Name.new("John Adams Jr.").suffix.should == "Jr."
         Parsely::Person::Name.new("Gregory House M.D.").suffix.should == "M.D."
       end
+    end
+    
+    it 'calls parse_title once' do
+      parser = Parsely::Person::Name.new("Gregory House M.D.")
+      parser.should_receive(:parse_suffix).once
+      2.times { parser.suffix }
     end
   end
   
@@ -118,6 +130,12 @@ describe Parsely::Person::Name do
       Parsely::Person::Name.new("First3 M M Last").first.should == "First3"
       Parsely::Person::Name.new("Last, First4").first.should == "First4"
     end
+    
+    it 'calls parse_first once' do
+      parser = Parsely::Person::Name.new("First Last")
+      parser.should_receive(:parse_first).once
+      2.times { parser.first }
+    end
   end
   
   describe '#last' do
@@ -130,6 +148,12 @@ describe Parsely::Person::Name do
       Parsely::Person::Name.new("First Middle Von Last Jr.").last.should == "Von Last"
       Parsely::Person::Name.new("Dr. First Middle Von Last").last.should == "Von Last"
     end
+    
+    it 'calls parse_last once' do
+      parser = Parsely::Person::Name.new("First Last")
+      parser.should_receive(:parse_last).once
+      2.times { parser.last }
+    end
   end
   
   describe '#middle' do
@@ -140,6 +164,12 @@ describe Parsely::Person::Name do
       Parsely::Person::Name.new("Last4, First").middle.should == ""
       Parsely::Person::Name.new("Last5, First Middle").middle.should == "Middle"
     end
+    
+    it 'calls parse_middle once' do
+      parser = Parsely::Person::Name.new("First Middle Last")
+      parser.should_receive(:parse_middle).once
+      2.times { parser.middle }
+    end
   end
   
   describe '#name' do
@@ -149,6 +179,12 @@ describe Parsely::Person::Name do
       Parsely::Person::Name.new("Mr. First Last").name.should == "Mr. First Last"
       Parsely::Person::Name.new("First Last Jr.").name.should == "First Last Jr."
       Parsely::Person::Name.new("Last, First").name.should == "First Last"
+    end
+    
+    it 'calls build_name once' do
+      parser = Parsely::Person::Name.new("First Last")
+      parser.should_receive(:build_name).once
+      2.times { parser.name }
     end
   
     context 'when proper is not specified' do

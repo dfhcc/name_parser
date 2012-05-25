@@ -24,36 +24,44 @@ module Parsely
       end
       
       def name
-        @name ||= build_name
+        return @name if defined?(@name)
+        @name = build_name
       end
       alias :to_s :name
       
       def to_hash
-        @hash ||= {:title => title, :first => first, :middle => middle, :last => last, :suffix => suffix}
+        return @hash if defined?(@hash)
+        @hash = {:title => title, :first => first, :middle => middle, :last => last, :suffix => suffix}
       end
       
       def first
-        @first ||= parse_first
+        return @first if defined?(@first)
+        @first = parse_first
       end
       
       def middle
-        @middle ||= parse_middle
+        return @middle if defined?(@middle)
+        @middle = parse_middle
       end
       
       def last
-        @last ||= parse_last
+        return @last if defined?(@last)
+        @last = parse_last
       end
       
       def title
-        @title ||= parse_title
+        return @title if defined?(@title)
+        @title = parse_title
       end
       
       def suffix
-        @suffix ||= parse_suffix
+        return @suffix if defined?(@suffix)
+        @suffix = parse_suffix
       end
       
       def parse_name
-        @parse_name ||= sanitized.gsub(title, '').gsub(suffix, '').strip
+        return @parse_name if defined?(@parse_name)
+        @parse_name = sanitized.gsub(title, '').gsub(suffix, '').strip
       end
       
       def [](attr)
