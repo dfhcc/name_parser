@@ -126,6 +126,9 @@ describe Parsely::Person::Name do
       Parsely::Person::Name.new("First Middle Last2").last.should == "Last2"
       Parsely::Person::Name.new("First M M Last3").last.should == "Last3"
       Parsely::Person::Name.new("Last4, First").last.should == "Last4"
+      Parsely::Person::Name.new("First Middle Von Last").last.should == "Von Last"
+      Parsely::Person::Name.new("First Middle Von Last Jr.").last.should == "Von Last"
+      Parsely::Person::Name.new("Dr. First Middle Von Last").last.should == "Von Last"
     end
   end
   
@@ -135,6 +138,7 @@ describe Parsely::Person::Name do
       Parsely::Person::Name.new("First Middle Last2").middle.should == "Middle"
       Parsely::Person::Name.new("First M M Last3").middle.should == "M M"
       Parsely::Person::Name.new("Last4, First").middle.should == ""
+      Parsely::Person::Name.new("Last5, First Middle").middle.should == "Middle"
     end
   end
   
