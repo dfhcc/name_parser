@@ -1,9 +1,7 @@
-parsely
-=======
+NameParser
+=========
 
-A parser. It currently only parses person names. 
-
-Based on Matthew Ericson's people gem: https://github.com/mericson/people which, in turn, is loosely based on 
+Does what it says. Based on Matthew Ericson's people gem: https://github.com/mericson/people which, in turn, is loosely based on 
 the Lingua-EN-NameParser Perl module.
 
 To set up development environment clone the repo and run `bundle` to get all of the dependencies.
@@ -11,24 +9,24 @@ To set up development environment clone the repo and run `bundle` to get all of 
 Usage
 -----
 ```
-require "parsely"
+require "name_parser"
 
 name = "Captain Arthur Two Sheds Jackson Jr."
 
-ppn = Parsely::PersonName.new(name)
-ppn.run
+np = NameParser.new(name)
+np.run
 
-ppn.first
+np.first
 => "Arthur"
-ppn.middle
+np.middle
 => "Two Sheds"
-ppn.last
+np.last
 => "Jackson"
-ppn.title
+np.title
 => "Captain"
-ppn.suffix
+np.suffix
 => "Jr."
 
-ppn.to_hash
+np.to_hash
 => { :title => "Captain", :first => "Arthur", :middle => "Two Sheds", :last => "Jackson", :suffix => "Jr." }
 ```

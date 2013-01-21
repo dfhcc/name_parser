@@ -1,6 +1,8 @@
-module Parsely
-  class PersonName
-    include PersonNameConstants
+module NameParser
+
+  class Parser
+
+    include Patterns
 
     attr_reader :first, :middle, :last, :title, :suffix
 
@@ -75,4 +77,5 @@ module Parsely
     end
 
   end
+
 end

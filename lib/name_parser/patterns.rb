@@ -1,5 +1,5 @@
-module Parsely
-  module PersonNameConstants
+module NameParser
+  module Patterns 
 
     NAME_PATTERN = "([\\w\\-\\']+)[\.{1,}\\s|\\s]+"
     LAST_NAME_PATTERN = "\;?([\\w\\-\\']+|(Mc|Mac|Des|Dell[ae]|Del|De La|De Los|Da|Di|Du|La|Le\
