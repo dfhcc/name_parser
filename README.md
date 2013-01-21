@@ -11,9 +11,11 @@ Usage
 ```
 require "name_parser"
 
+include NameParser
+
 name = "Captain Arthur Two Sheds Jackson Jr."
 
-np = NameParser.new(name)
+np = Parser.new(name)
 np.run
 
 np.first
