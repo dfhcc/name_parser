@@ -44,6 +44,7 @@ module NameParser
     def reverse_last_and_first_names
       @name.gsub!(/;/, '')
       @name.gsub!(/(.+),(.+)/, "\\2 ;\\1")
+      @name.strip!
     end
 
     def remove_commas

@@ -78,7 +78,7 @@ describe Parser do
       set_name('Smith, Johnny')
       parser.reverse_last_and_first_names
 
-      get_name.should == ' Johnny ;Smith'
+      get_name.should == 'Johnny ;Smith'
     end
   end
 
