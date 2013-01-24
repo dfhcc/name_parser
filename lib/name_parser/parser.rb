@@ -34,7 +34,8 @@ module NameParser
     end
 
     def remove_extra_spaces
-      @name.gsub(/\s+/, ' ').strip!
+      @name.gsub!(/\s+/, ' ')
+      @name.strip!
     end
 
     def clean_trailing_suffixes
