@@ -49,18 +49,21 @@ describe Parser do
   describe '#remove_extra_spaces' do
     it 'removes leading spaces, tabs and line breaks' do
       set_name(" \t\nFoo")
+      parser.remove_extra_spaces
 
-      parser.remove_extra_spaces.should == 'Foo'
+      get_name.should == 'Foo'
     end
     it 'removes trailing spaces, tabs and line breaks' do
       set_name("Foo \t\n")
+      parser.remove_extra_spaces
 
-      parser.remove_extra_spaces.should == 'Foo'
+      get_name.should == 'Foo'
     end
     it 'replaces repeating spaces, tabs and line breaks with a single space' do
       set_name("  Foo  \t\nBar  ")
+      parser.remove_extra_spaces
 
-      parser.remove_extra_spaces.should == 'Foo Bar'
+      get_name.should == 'Foo Bar'
     end
   end
 
