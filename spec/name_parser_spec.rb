@@ -5,7 +5,7 @@ class TestClass
 end
 
 describe NameParser do
-  let!(:name) { "Adams, John Quincy" }
+  let!(:name) { "Adams Jr., Mr. John Quincy" }
   let!(:test_class) { TestClass.new }
 
   describe '#name_parser' do
@@ -15,9 +15,11 @@ describe NameParser do
 
     it 'should run the parser' do
       parser = test_class.name_parser(name)
+      parser.title.should == 'Mr.'
       parser.first.should == 'John'
       parser.middle.should == 'Quincy'
       parser.last.should == 'Adams'
+      parser.suffix.should == 'Jr.'
     end
   end
 end
