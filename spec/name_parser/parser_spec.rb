@@ -5,13 +5,14 @@ include NameParser
 Parser.send(:public, *Parser.protected_instance_methods)
 
 describe Parser do
-  let(:name) { 'Horatio Xavier Hornblower' }
-  let(:parser) { Parser.new(name) }
+  let!(:name) { 'Horatio Xavier Hornblower' }
+  let!(:parser) { Parser.new(name) }
+  let!(:methods) { parser.methods }
 
-  [:name, :first, :middle, :last, :title, :suffix ].each do |attr|
+  [:name, :first, :middle, :last, :title, :suffix].each do |attr|
     describe "#{attr} attribute" do 
       it 'is read only' do
-        parser.methods.should_not include(":#{attr}=".to_sym) 
+        methods.should_not include(":#{attr}=".to_sym) 
       end
     end
   end
