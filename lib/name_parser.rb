@@ -3,9 +3,7 @@ module NameParser
   autoload :Patterns,'name_parser/patterns'
   autoload :Parser,  'name_parser/parser'
 
-  def parse_name(name)
-    parser = Parser.new(name)
-    parser.run
-    parser
+  def name_parser(name)
+    Parser.new(name)
   end
 end
