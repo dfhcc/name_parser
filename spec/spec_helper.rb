@@ -2,4 +2,5 @@ require 'rubygems'
 require 'rspec'
 require 'debugger'
 
-require File.expand_path('../../lib/name_parser', __FILE__)
+$:.push File.expand_path("../lib", __FILE__)
+require 'name_parser'
