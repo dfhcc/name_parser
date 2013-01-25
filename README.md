@@ -8,7 +8,7 @@ To set up development environment clone the repo and run `bundle` to get all of 
 
 Usage
 -----
-```
+```ruby
 require "name_parser"
 
 include NameParser
@@ -18,17 +18,23 @@ name = "Captain Arthur Two Sheds Jackson Jr."
 np = Parser.new(name)
 np.run
 
-np.first
-=> "Arthur"
-np.middle
-=> "Two Sheds"
-np.last
-=> "Jackson"
-np.title
-=> "Captain"
-np.suffix
-=> "Jr."
+np.first  # => "Arthur"
+np.middle # => "Two Sheds"
+np.last   # => "Jackson"
+np.title  # => "Captain"
+np.suffix # => "Jr."
+```
 
-np.to_hash
-=> { :title => "Captain", :first => "Arthur", :middle => "Two Sheds", :last => "Jackson", :suffix => "Jr." }
+or using the mixin
+
+```ruby
+require "name_parser"
+include NameParser
+
+name = "Captain Arthur Two Sheds Jackson Jr."
+
+parser = name_parser(name) # => NameParser::Parser
+
+parser.first # => "Arthur"
+# ...
 ```
