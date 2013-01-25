@@ -11,7 +11,7 @@ describe Parser do
   [:name, :first, :middle, :last, :title, :suffix ].each do |attr|
     describe "#{attr} attribute" do 
       it 'is read only' do
-        parser.methods.should_not include(":#{attr}=") 
+        parser.methods.should_not include(":#{attr}=".to_sym) 
       end
     end
   end
@@ -20,20 +20,6 @@ describe Parser do
     it 'is set on initialize' do
       get_name.should == name 
     end
-  end
-
- describe '#to_hash' do
-   it 'returns title, first, middle, last and suffix attributes as hash' do
-     set_name('Major Peter X. Q Mac Donovan, Jr.')
-     expected = { :title => 'Major', :first => 'Peter', :middle => 'X Q', :last => 'Mac Donovan', :suffix => 'Jr.' }
-
-     parser.to_hash.should == expected
-   end
-   
-   it 'calls run only once' do
-    parser.should_receive(:run).once
-    2.times { parser.to_hash }
-   end
   end
 
   describe '#remove_non_name_characters' do
@@ -52,12 +38,14 @@ describe Parser do
 
       get_name.should == 'Foo'
     end
+
     it 'removes trailing spaces, tabs and line breaks' do
       set_name("Foo \t\n")
       parser.remove_extra_spaces
 
       get_name.should == 'Foo'
     end
+
     it 'replaces repeating spaces, tabs and line breaks with a single space' do
       set_name("  Foo  \t\nBar  ")
       parser.remove_extra_spaces
@@ -101,6 +89,7 @@ describe Parser do
         parser.parse_title
         parser.title.should == 'Colonel'
       end
+
       it 'removes the title from name' do
         parser.parse_title
 
@@ -127,6 +116,7 @@ describe Parser do
         parser.suffix.should == 'Jr.'
 
       end
+
       it 'removes the suffix from name' do
         parser.parse_suffix
 
@@ -244,7 +234,7 @@ describe Parser do
     context 'when first name, middle initial and last name' do
       before do
         set_name('John R Tolkien')
-         parser.parse_name
+        parser.parse_name
       end
 
       it 'returns first name' do
@@ -282,7 +272,7 @@ describe Parser do
     context 'when first name, two middle initials with dots and last name' do
       before do
         set_name('John R. R. Tolkien')
-         parser.parse_name
+        parser.parse_name
       end
 
       it 'returns first name' do
@@ -352,10 +342,14 @@ describe Parser do
         parser.last.should == 'Tolkien'
       end
     end
-
   end
 
   def set_name(name)
+    parser.instance_variable_set(:@first, nil)
+    parser.instance_variable_set(:@middle, nil)
+    parser.instance_variable_set(:@last, nil)
+    parser.instance_variable_set(:@title, nil)
+    parser.instance_variable_set(:@suffix, nil)
     parser.instance_variable_set(:@name, name)
   end
 
