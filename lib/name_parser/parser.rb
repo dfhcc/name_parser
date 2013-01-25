@@ -25,7 +25,7 @@ module NameParser
       def remove_non_name_characters
         @name.gsub!(/[^A-Za-z0-9\-\'\.&\/ \,]/, '')
       end
-
+      
       def remove_extra_spaces
         @name.gsub!(/\s+/, ' ')
         @name.strip!
