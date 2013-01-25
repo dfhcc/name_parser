@@ -15,20 +15,20 @@ include NameParser
 
 name = "Captain Arthur Two Sheds Jackson Jr."
 
-np = Parser.new(name)
-np.run
+parser = Parser.new(name)
 
-np.first  # => "Arthur"
-np.middle # => "Two Sheds"
-np.last   # => "Jackson"
-np.title  # => "Captain"
-np.suffix # => "Jr."
+parser.first  # => "Arthur"
+parser.middle # => "Two Sheds"
+parser.last   # => "Jackson"
+parser.title  # => "Captain"
+parser.suffix # => "Jr."
 ```
 
 or using the mixin
 
 ```ruby
 require "name_parser"
+
 include NameParser
 
 name = "Captain Arthur Two Sheds Jackson Jr."
