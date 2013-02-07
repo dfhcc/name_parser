@@ -38,3 +38,9 @@ parser = name_parser(name) # => NameParser::Parser
 parser.first # => "Arthur"
 # ...
 ```
+
+## Supported Ruby Versions
+
+- 1.9.2
+- 1.9.3
+- 2.0.0
