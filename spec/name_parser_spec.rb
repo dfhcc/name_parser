@@ -23,3 +23,22 @@ describe NameParser do
     end
   end
 end
+
+describe String do
+  let!(:name) { "Adams Jr., Mr. John Quincy" }
+
+  describe '#parse_name' do
+    it 'returns a new NameParser::Parser object' do
+      name.parse_name.class.should == NameParser::Parser
+    end
+
+    it 'should run the parser' do
+      parser = name.parse_name
+      parser.title.should == 'Mr.'
+      parser.first.should == 'John'
+      parser.middle.should == 'Quincy'
+      parser.last.should == 'Adams'
+      parser.suffix.should == 'Jr.'
+    end
+  end
+end

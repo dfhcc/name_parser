@@ -7,3 +7,11 @@ module NameParser
     Parser.new(name)
   end
 end
+
+class String
+  include NameParser
+
+  def parse_name
+    return name_parser(self)
+  end
+end
