@@ -25,5 +25,5 @@ module NameParser
     Counselor|Delegate|(Lieutentant )Governor|Postmaster( General)"
     EDUCATOR = "Dean|President|Ass(\\.|oc\\.|ociate|t\\.|istant) Prof(\\.|essor)|Prof(\\.|essor)"
     TITLE_PATTERN = [ STANDARD, ROYALTY, MEDICINE, LEGAL, POLICE, MILITARY, RELIGIOUS, POLITICIAN, EDUCATOR ].join("|")
- end
+  end
 end
